@@ -1,4 +1,4 @@
-import type { TutorialGroup } from './layout';
+import type { TutorialGroup, ReferenceSection } from './layout';
 
 export const typographyTutorials: TutorialGroup[] = [
   {
@@ -339,6 +339,235 @@ body { font-family: system-ui, sans-serif; }
    Change --brand to hsl(340, 80%, 55%) → pink theme
    Change --radius to 0px → sharp corners
    Add --brand-light and use it on .card background */`,
+      },
+    ],
+  },
+];
+
+export const typographyReference: ReferenceSection[] = [
+  {
+    id: 'font-properties',
+    title: 'Font Properties',
+    cards: [
+      {
+        id: 'font-family',
+        property: 'font-family',
+        description: 'Sets the typeface. Always list a fallback family at the end.',
+        values: [
+          { value: 'Georgia, serif', note: 'system serif with fallback' },
+          { value: 'system-ui, sans-serif', note: 'OS default UI font' },
+          { value: 'monospace', note: 'fixed-width (code)' },
+        ],
+        demoHtml: `<p class="a">Georgia (serif)</p>
+<p class="b">system-ui (sans)</p>
+<p class="c">monospace</p>`,
+        demoCss: `p{margin:0 0 4px;font-size:14px;color:#1f2937}
+.a{font-family:Georgia,serif}
+.b{font-family:system-ui,sans-serif}
+.c{font-family:monospace}`,
+      },
+      {
+        id: 'font-size',
+        property: 'font-size',
+        description: 'Controls text size. rem is relative to the root; px is absolute.',
+        values: [
+          { value: '16px', note: 'browser default body size' },
+          { value: '1rem', note: 'relative to root (usually 16px)' },
+          { value: '1.25em', note: 'relative to parent element' },
+        ],
+        demoHtml: `<p class="sm">12px — small</p>
+<p class="md">16px — base</p>
+<p class="lg">24px — large</p>
+<p class="xl">32px — heading</p>`,
+        demoCss: `p{margin:0 0 2px;font-family:system-ui,sans-serif;color:#1f2937}
+.sm{font-size:12px}.md{font-size:16px}.lg{font-size:24px}.xl{font-size:32px}`,
+      },
+      {
+        id: 'font-weight',
+        property: 'font-weight',
+        description: 'Controls thickness. Numeric values give finer control than keywords.',
+        values: [
+          { value: '400', note: 'normal / regular' },
+          { value: '700', note: 'bold' },
+          { value: '100–900', note: 'full range (if font supports it)' },
+        ],
+        demoHtml: `<p class="w100">weight 100</p>
+<p class="w400">weight 400</p>
+<p class="w700">weight 700</p>
+<p class="w900">weight 900</p>`,
+        demoCss: `p{margin:0 0 2px;font-family:system-ui,sans-serif;font-size:15px;color:#1f2937}
+.w100{font-weight:100}.w400{font-weight:400}.w700{font-weight:700}.w900{font-weight:900}`,
+      },
+    ],
+  },
+  {
+    id: 'text-layout',
+    title: 'Text Layout Properties',
+    cards: [
+      {
+        id: 'line-height',
+        property: 'line-height',
+        description:
+          'Vertical space between lines. Unitless values (e.g. 1.5) scale with font-size — prefer them.',
+        values: [
+          { value: '1', note: 'tight — lines touch' },
+          { value: '1.5', note: 'comfortable reading' },
+          { value: '2', note: 'airy / double-spaced' },
+        ],
+        demoHtml: `<p class="tight">Tight 1.1 — This paragraph is dense. Lines are close together.</p>
+<p class="loose">Loose 1.8 — This paragraph breathes. Lines are spaced apart.</p>`,
+        demoCss: `p{font-family:system-ui,sans-serif;font-size:13px;color:#374151;margin:0 0 6px;max-width:220px}
+.tight{line-height:1.1}.loose{line-height:1.8}`,
+      },
+      {
+        id: 'text-align',
+        property: 'text-align',
+        description: 'Horizontal alignment of text within its container.',
+        values: [
+          { value: 'left', note: 'default for LTR text' },
+          { value: 'center', note: 'centered' },
+          { value: 'right', note: 'right-aligned' },
+        ],
+        demoHtml: `<p class="l">Left aligned text</p>
+<p class="c">Center aligned text</p>
+<p class="r">Right aligned text</p>`,
+        demoCss: `p{font-family:system-ui,sans-serif;font-size:13px;color:#374151;margin:0 0 4px;border:1px dashed #e5e7eb;padding:2px 6px;border-radius:4px}
+.l{text-align:left}.c{text-align:center}.r{text-align:right}`,
+      },
+      {
+        id: 'text-transform',
+        property: 'text-transform',
+        description: 'Changes letter casing without editing the HTML.',
+        values: [
+          { value: 'uppercase', note: 'ALL CAPS' },
+          { value: 'lowercase', note: 'all lowercase' },
+          { value: 'capitalize', note: 'First Letter Each Word' },
+        ],
+        demoHtml: `<p class="u">hello world</p>
+<p class="l">HELLO WORLD</p>
+<p class="c">hello world</p>`,
+        demoCss: `p{font-family:system-ui,sans-serif;font-size:14px;font-weight:600;color:#4f46e5;margin:0 0 4px;letter-spacing:0.05em}
+.u{text-transform:uppercase}.l{text-transform:lowercase}.c{text-transform:capitalize}`,
+      },
+    ],
+  },
+  {
+    id: 'color-formats',
+    title: 'Color Formats',
+    cards: [
+      {
+        id: 'hex',
+        property: 'hex (#rrggbb)',
+        description:
+          'Six hex digits encode red, green, blue (00–ff each). Short form: #rgb. Add two more digits for alpha: #rrggbbaa.',
+        values: [
+          { value: '#000000', note: 'black' },
+          { value: '#ffffff', note: 'white' },
+          { value: '#3b82f6', note: 'a shade of blue' },
+          { value: '#3b82f680', note: '~50% transparent blue' },
+        ],
+        demoHtml: `<div class="a">#3b82f6</div>
+<div class="b">#f97316</div>
+<div class="c">#10b981</div>
+<div class="d">#3b82f680</div>`,
+        demoCss: `div{padding:8px 12px;border-radius:6px;margin-bottom:6px;font-family:monospace;font-size:12px;font-weight:600;color:#fff}
+.a{background:#3b82f6}.b{background:#f97316}.c{background:#10b981}.d{background:#3b82f680;color:#1f2937;border:1px solid #cbd5e1}`,
+      },
+      {
+        id: 'rgb',
+        property: 'rgb() / rgba()',
+        description:
+          'Red, green, blue as numbers 0–255. rgb() also accepts an alpha channel as a fourth value (0–1).',
+        values: [
+          { value: 'rgb(59, 130, 246)', note: 'blue' },
+          { value: 'rgb(249, 115, 22)', note: 'orange' },
+          { value: 'rgb(59 130 246 / 0.5)', note: 'modern syntax with alpha' },
+        ],
+        demoHtml: `<div class="a">rgb(59, 130, 246)</div>
+<div class="b">rgb(249, 115, 22)</div>
+<div class="c">rgb(59 130 246 / 0.5)</div>`,
+        demoCss: `div{padding:8px 12px;border-radius:6px;margin-bottom:6px;font-family:monospace;font-size:12px;font-weight:600;color:#fff}
+.a{background:rgb(59,130,246)}.b{background:rgb(249,115,22)}.c{background:rgb(59 130 246/0.5);color:#1f2937;border:1px solid #cbd5e1}`,
+      },
+      {
+        id: 'hsl',
+        property: 'hsl()',
+        description:
+          'Hue (0–360°), Saturation (%), Lightness (%). Easier to reason about than rgb — spin the hue to change color.',
+        values: [
+          { value: 'hsl(217, 91%, 60%)', note: 'blue at 60% lightness' },
+          { value: 'hsl(0, 91%, 60%)', note: 'same saturation, red hue' },
+          { value: 'hsl(217, 0%, 60%)', note: 'same hue, 0% sat = grey' },
+        ],
+        demoHtml: `<div class="a">hsl(217, 91%, 60%) blue</div>
+<div class="b">hsl(0, 91%, 60%) red</div>
+<div class="c">hsl(120, 60%, 40%) green</div>
+<div class="d">hsl(217, 0%, 60%) grey</div>`,
+        demoCss: `div{padding:8px 12px;border-radius:6px;margin-bottom:6px;font-family:monospace;font-size:11px;font-weight:600;color:#fff}
+.a{background:hsl(217,91%,60%)}.b{background:hsl(0,91%,60%)}.c{background:hsl(120,60%,40%)}.d{background:hsl(217,0%,60%);color:#1f2937}`,
+      },
+      {
+        id: 'oklch',
+        property: 'oklch()',
+        description:
+          'Lightness (0–1), Chroma (0–0.4), Hue (0–360°). Perceptually uniform — equal lightness steps look equal.',
+        values: [
+          { value: 'oklch(0.6 0.18 250)', note: 'blue at L=0.6' },
+          { value: 'oklch(0.6 0.18 140)', note: 'same L, green hue' },
+          { value: 'oklch(0.6 0.05 250)', note: 'same L, muted chroma' },
+        ],
+        demoHtml: `<div class="a">oklch(0.6 0.18 250)</div>
+<div class="b">oklch(0.6 0.18 140)</div>
+<div class="c">oklch(0.6 0.05 250)</div>
+<div class="d">oklch(0.85 0.18 90)</div>`,
+        demoCss: `div{padding:8px 12px;border-radius:6px;margin-bottom:6px;font-family:monospace;font-size:11px;font-weight:600;color:#fff}
+.a{background:oklch(0.6 0.18 250)}.b{background:oklch(0.6 0.18 140)}.c{background:oklch(0.6 0.05 250)}.d{background:oklch(0.85 0.18 90);color:#333}`,
+      },
+    ],
+  },
+  {
+    id: 'font-stacks',
+    title: 'Font Stack Recommendations',
+    cards: [
+      {
+        id: 'system-ui',
+        property: 'System UI',
+        description: "Uses the OS's own interface font. Fast, no network request, feels native.",
+        values: [
+          { value: 'system-ui, sans-serif', note: 'shortest form' },
+          {
+            value: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            note: 'cross-platform explicit list',
+          },
+        ],
+        demoHtml: `<p class="a">System UI — the quick brown fox</p>
+<p class="b">0123456789 !@#$%</p>`,
+        demoCss: `p{font-family:system-ui,sans-serif;font-size:15px;color:#1f2937;margin:0 0 4px}
+.b{font-size:13px;color:#6b7280}`,
+      },
+      {
+        id: 'serif',
+        property: 'Serif stacks',
+        description: 'Good for long-form reading. Georgia is the safest web-safe serif.',
+        values: [
+          { value: 'Georgia, "Times New Roman", serif', note: 'classic editorial' },
+          { value: '"Palatino Linotype", Palatino, serif', note: 'elegant alternative' },
+        ],
+        demoHtml: `<p class="a">Georgia serif — the quick brown fox</p>
+<p class="b">Reading text benefits from serifs at body sizes.</p>`,
+        demoCss: `p{font-family:Georgia,"Times New Roman",serif;font-size:15px;color:#1f2937;margin:0 0 4px;line-height:1.6}
+.b{font-size:13px;color:#6b7280}`,
+      },
+      {
+        id: 'monospace',
+        property: 'Monospace stacks',
+        description: 'Fixed-width fonts for code snippets and tabular data.',
+        values: [
+          { value: '"Courier New", Courier, monospace', note: 'universal fallback' },
+          { value: 'ui-monospace, "Cascadia Code", monospace', note: 'modern with ligatures' },
+        ],
+        demoHtml: `<code class="a">const color = "oklch(0.6 0.18 250)";</code>`,
+        demoCss: `code{display:block;font-family:ui-monospace,"Cascadia Code","Courier New",monospace;font-size:13px;color:#4f46e5;background:#f5f3ff;padding:10px 12px;border-radius:6px;white-space:pre}`,
       },
     ],
   },
