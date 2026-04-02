@@ -1,4 +1,4 @@
-import type { TutorialGroup, ReferenceSection } from './layout';
+import type { TutorialGroup, ReferenceSection, Challenge } from './layout';
 
 export const selectorsTutorials: TutorialGroup[] = [
   {
@@ -552,6 +552,196 @@ p { margin: 0; font-weight: bold; font-size: 15px; }`,
         demoCss: `#p1, #p2 { color: #6366f1; }
 .blue { color: #3b82f6; }
 p { margin: 4px 0; font-weight: bold; }`,
+      },
+    ],
+  },
+];
+
+export const selectorsChallenges: Challenge[] = [
+  {
+    id: 'direct-children',
+    title: 'Style Direct Children Only',
+    description:
+      'Use the child combinator (>) to style only the top-level list items — not the nested ones.',
+    targetHtml: `<ul class="menu">
+  <li>Home</li>
+  <li>Products
+    <ul>
+      <li>Widgets</li>
+      <li>Gadgets</li>
+    </ul>
+  </li>
+  <li>About</li>
+</ul>`,
+    targetCss: `.menu > li {
+  color: #6366f1;
+  font-weight: bold;
+  padding: 4px 0;
+}
+
+.menu ul li {
+  color: #6b7280;
+  font-weight: normal;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul {
+  list-style: none;
+  padding-left: 16px;
+  margin: 4px 0;
+}`,
+    startingHtml: `<ul class="menu">
+  <li>Home</li>
+  <li>Products
+    <ul>
+      <li>Widgets</li>
+      <li>Gadgets</li>
+    </ul>
+  </li>
+  <li>About</li>
+</ul>`,
+    startingCss: `/* This styles ALL li — nested ones too. Fix it! */
+.menu li {
+  color: #6366f1;
+  font-weight: bold;
+  padding: 4px 0;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul {
+  list-style: none;
+  padding-left: 16px;
+  margin: 4px 0;
+}`,
+    checks: [
+      {
+        label: 'Uses the child combinator (>)',
+        test: css => />/.test(css),
+      },
+      {
+        label: 'Targets .menu > li (direct children only)',
+        test: css => /\.menu\s*>\s*li/.test(css),
+      },
+      {
+        label: 'Nested items are styled differently',
+        test: css => /\.menu\s*>\s*li/.test(css) && /\.menu\s+(ul\s+li|li\s+li)/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'specificity-battle',
+    title: 'Win the Specificity Battle',
+    description:
+      'The ID rule colors the text red. Add a rule to make it green — use !important to override the ID.',
+    targetHtml: `<p id="alert" class="success">Payment confirmed!</p>`,
+    targetCss: `#alert {
+  color: #dc2626;
+}
+
+.success {
+  color: #16a34a !important;
+  font-weight: bold;
+}
+
+p { margin: 0; font-size: 15px; }`,
+    startingHtml: `<p id="alert" class="success">Payment confirmed!</p>`,
+    startingCss: `/* The ID rule wins — text is red */
+#alert {
+  color: #dc2626;
+}
+
+/* Add a .success rule that overrides the ID */
+
+p { margin: 0; font-size: 15px; }`,
+    checks: [
+      {
+        label: 'Has a .success rule',
+        test: css => /\.success\s*\{/.test(css),
+      },
+      {
+        label: 'Uses !important to override the ID',
+        test: css => /!important/.test(css),
+      },
+      {
+        label: 'Sets text color to green (#16a34a)',
+        test: css => /color\s*:\s*#16a34a/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'fix-broken-selector',
+    title: 'Fix the Broken Selector',
+    description:
+      'The CSS uses .card.title (targets elements with both classes) instead of .card .title (descendant). Fix both broken selectors.',
+    targetHtml: `<div class="card">
+  <h3 class="title">Card Title</h3>
+  <p class="body-text">Some body text here.</p>
+</div>`,
+    targetCss: `.card .title {
+  color: #6366f1;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+
+.card .body-text {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+.card {
+  border: 2px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 240px;
+}`,
+    startingHtml: `<div class="card">
+  <h3 class="title">Card Title</h3>
+  <p class="body-text">Some body text here.</p>
+</div>`,
+    startingCss: `/* BUG: .card.title targets an element with BOTH classes
+   Fix: add a space to make it a descendant selector */
+.card.title {
+  color: #6366f1;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+
+/* BUG: same issue here */
+.card.body-text {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+.card {
+  border: 2px solid #e5e7eb;
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 240px;
+}`,
+    checks: [
+      {
+        label: 'Fixed .card .title (descendant selector)',
+        test: css => /\.card\s+\.title/.test(css),
+      },
+      {
+        label: 'Fixed .card .body-text (descendant selector)',
+        test: css => /\.card\s+\.body-text/.test(css),
+      },
+      {
+        label: 'No more broken combined selectors (.card.title or .card.body-text)',
+        test: css => !/\.card\.title/.test(css) && !/\.card\.body-text/.test(css),
       },
     ],
   },

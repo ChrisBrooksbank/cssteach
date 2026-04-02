@@ -1,9 +1,11 @@
 import ChallengesView from '@/components/ChallengesView';
 import { layoutChallenges } from '@/data/layout';
 import type { Challenge } from '@/data/layout';
+import { selectorsChallenges } from '@/data/selectors';
 
 const challengesByTopic: Record<string, Challenge[]> = {
   layout: layoutChallenges,
+  selectors: selectorsChallenges,
 };
 
 export default async function ChallengesPage({ params }: { params: Promise<{ topic: string }> }) {
