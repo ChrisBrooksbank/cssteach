@@ -1,4 +1,4 @@
-import type { TutorialGroup, ReferenceSection } from './layout';
+import type { TutorialGroup, ReferenceSection, Challenge } from './layout';
 
 export const animationsTutorials: TutorialGroup[] = [
   {
@@ -907,6 +907,281 @@ export const animationsReference: ReferenceSection[] = [
 .list{display:flex;flex-direction:column;gap:4px}
 .item{padding:6px 12px;background:#6366f1;color:#fff;border-radius:6px;font-size:12px;font-weight:600;animation:enter 0.5s ease-out both infinite}
 .i1{animation-delay:0s}.i2{animation-delay:0.15s}.i3{animation-delay:0.3s}.i4{animation-delay:0.45s}`,
+      },
+    ],
+  },
+];
+
+export const animationsChallenges: Challenge[] = [
+  {
+    id: 'hover-effect',
+    title: 'Build a Hover Effect',
+    description:
+      'Add a smooth hover effect to the card. It should lift up and gain a shadow when hovered, using transitions.',
+    targetHtml: `<div class="card">
+  <h3 class="card-title">Hover over me</h3>
+  <p class="card-body">A smooth transition on transform and box-shadow.</p>
+</div>`,
+    targetCss: `body { font-family: system-ui, sans-serif; padding: 32px; background: #f9fafb; }
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.card-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.card-body {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}`,
+    startingHtml: `<div class="card">
+  <h3 class="card-title">Hover over me</h3>
+  <p class="card-body">A smooth transition on transform and box-shadow.</p>
+</div>`,
+    startingCss: `body { font-family: system-ui, sans-serif; padding: 32px; background: #f9fafb; }
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  /* Add transition here */
+}
+
+/* Add hover state */
+
+.card-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.card-body {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}`,
+    checks: [
+      {
+        label: '.card has a transition property',
+        test: css => /\.card\s*\{[^}]*transition/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.card:hover lifts with translateY',
+        test: css => /\.card:hover[^}]*translateY/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.card:hover adds box-shadow',
+        test: css => /\.card:hover[^}]*box-shadow/.test(css.replace(/\n/g, ' ')),
+      },
+    ],
+  },
+  {
+    id: 'loading-spinner',
+    title: 'Build a Loading Spinner',
+    description:
+      'Create a CSS-only spinning loader. Use @keyframes to rotate a circle element continuously.',
+    targetHtml: `<div class="spinner"></div>`,
+    targetCss: `body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 160px; background: #f9fafb; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}`,
+    startingHtml: `<div class="spinner"></div>`,
+    startingCss: `body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 160px; background: #f9fafb; }
+
+/* Define your keyframes */
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e7eb;
+  /* Give it a colored top border to create the arc */
+  border-radius: 50%;
+  /* Add animation here */
+}`,
+    checks: [
+      {
+        label: '@keyframes defines a rotation to 360deg',
+        test: css => /@keyframes/.test(css) && /rotate\s*\(\s*360deg\s*\)/.test(css),
+      },
+      {
+        label: '.spinner has border-radius: 50%',
+        test: css => /\.spinner[^}]*border-radius\s*:\s*50%/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.spinner uses animation with linear and infinite',
+        test: css =>
+          /\.spinner[^}]*animation/.test(css.replace(/\n/g, ' ')) &&
+          /linear/.test(css) &&
+          /infinite/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'fade-in',
+    title: 'Fade-In Page Transition',
+    description:
+      'Make the content section fade in when the page loads. Use @keyframes to animate from opacity 0 to 1.',
+    targetHtml: `<div class="page">
+  <h1 class="heading">Welcome</h1>
+  <p class="text">This section fades in smoothly on load.</p>
+</div>`,
+    targetCss: `body { font-family: system-ui, sans-serif; padding: 32px; background: #f9fafb; }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page {
+  animation: fade-in 0.6s ease-out both;
+}
+
+.heading {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #111827;
+}
+
+.text {
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
+}`,
+    startingHtml: `<div class="page">
+  <h1 class="heading">Welcome</h1>
+  <p class="text">This section fades in smoothly on load.</p>
+</div>`,
+    startingCss: `body { font-family: system-ui, sans-serif; padding: 32px; background: #f9fafb; }
+
+/* Define your fade-in keyframes */
+
+.page {
+  /* Apply the animation here */
+}
+
+.heading {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #111827;
+}
+
+.text {
+  margin: 0;
+  font-size: 15px;
+  color: #6b7280;
+}`,
+    checks: [
+      {
+        label: '@keyframes defines opacity change from 0 to 1',
+        test: css =>
+          /@keyframes/.test(css) && /opacity\s*:\s*0/.test(css) && /opacity\s*:\s*1/.test(css),
+      },
+      {
+        label: '.page uses animation',
+        test: css => /\.page[^}]*animation/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: 'animation uses ease-out or ease',
+        test: css => /ease-out|ease/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'button-states',
+    title: 'Interactive Button States',
+    description:
+      'Style a button with smooth transitions across three states: default, hover, and active (pressed). Each state should look distinct.',
+    targetHtml: `<button class="btn">Click me</button>`,
+    targetCss: `body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 160px; background: #f9fafb; }
+
+.btn {
+  padding: 12px 28px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+}
+
+.btn:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+}
+
+.btn:active {
+  background: #3730a3;
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(99, 102, 241, 0.3);
+}`,
+    startingHtml: `<button class="btn">Click me</button>`,
+    startingCss: `body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 160px; background: #f9fafb; }
+
+.btn {
+  padding: 12px 28px;
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  /* Add transition for smooth state changes */
+}
+
+/* Add :hover state */
+
+/* Add :active state — pressed feel: move down, less shadow */`,
+    checks: [
+      {
+        label: '.btn has a transition property',
+        test: css => /\.btn\s*\{[^}]*transition/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.btn:hover changes background',
+        test: css => /\.btn:hover[^}]*background/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.btn:active is defined',
+        test: css => /\.btn:active/.test(css),
+      },
+      {
+        label: '.btn:active moves down (translateY > 0)',
+        test: css => {
+          const m = css
+            .replace(/\n/g, ' ')
+            .match(/\.btn:active[^}]*translateY\s*\(\s*([\d.]+)px\s*\)/);
+          return m ? parseFloat(m[1]) > 0 : false;
+        },
       },
     ],
   },
