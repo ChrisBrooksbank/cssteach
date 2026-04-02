@@ -19,7 +19,7 @@
 - [x] Layout tutorials — Flexbox basics and wrapping/grow/shrink lessons with LiveEditor
 - [x] Layout tutorials — CSS Grid basics, placement/spanning, and responsive layouts
 - [x] Layout reference — Flexbox and Grid property cards with visual demos; common layout patterns (holy grail, sidebar, card grid)
-- [ ] Layout challenges — Centering, navbar, card grid, and holy grail with pass/fail feedback
+- [x] Layout challenges — Centering, navbar, card grid, and holy grail with pass/fail feedback
 
 ### Phase 3: Selectors Module (spec: selectors.md)
 

@@ -467,3 +467,323 @@ export const layoutTutorials: TutorialGroup[] = [
     ],
   },
 ];
+
+export interface ChallengeCheck {
+  label: string;
+  test: (css: string) => boolean;
+}
+
+export interface Challenge {
+  id: string;
+  title: string;
+  description: string;
+  targetHtml: string;
+  targetCss: string;
+  startingHtml: string;
+  startingCss: string;
+  checks: ChallengeCheck[];
+}
+
+export const layoutChallenges: Challenge[] = [
+  {
+    id: 'centering',
+    title: 'Center an Element',
+    description:
+      'Use flexbox to center the box both horizontally and vertically inside its container.',
+    targetHtml: `<div class="container">
+  <div class="box">Centered</div>
+</div>`,
+    targetCss: `.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 160px;
+  background: #f4f4f5;
+  border-radius: 8px;
+}
+.box {
+  width: 80px;
+  height: 80px;
+  background: #6366f1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 8px;
+}`,
+    startingHtml: `<div class="container">
+  <div class="box">Centered</div>
+</div>`,
+    startingCss: `.container {
+  /* Make this a flex container */
+  height: 160px;
+  background: #f4f4f5;
+  border-radius: 8px;
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  background: #6366f1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 8px;
+}`,
+    checks: [
+      {
+        label: 'Container uses display: flex',
+        test: css => /\.container\s*\{[^}]*display\s*:\s*flex/.test(css),
+      },
+      {
+        label: 'Horizontal centering: justify-content: center',
+        test: css => /justify-content\s*:\s*center/.test(css),
+      },
+      {
+        label: 'Vertical centering: align-items: center',
+        test: css => /align-items\s*:\s*center/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'navbar',
+    title: 'Build a Navigation Bar',
+    description:
+      'Use flexbox so the brand name sits on the left and the nav links are pushed to the right.',
+    targetHtml: `<nav class="navbar">
+  <span class="brand">MyApp</span>
+  <ul class="links">
+    <li>Home</li>
+    <li>About</li>
+    <li>Contact</li>
+  </ul>
+</nav>`,
+    targetCss: `.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e1b4b;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+.brand {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+.links {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.links li {
+  color: #c7d2fe;
+  font-size: 14px;
+  cursor: pointer;
+}`,
+    startingHtml: `<nav class="navbar">
+  <span class="brand">MyApp</span>
+  <ul class="links">
+    <li>Home</li>
+    <li>About</li>
+    <li>Contact</li>
+  </ul>
+</nav>`,
+    startingCss: `.navbar {
+  /* Push brand left, links right */
+  background: #1e1b4b;
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+.brand {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+.links {
+  /* Make links horizontal with gaps */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.links li {
+  color: #c7d2fe;
+  font-size: 14px;
+}`,
+    checks: [
+      {
+        label: 'Navbar uses display: flex',
+        test: css => /\.navbar\s*\{[^}]*display\s*:\s*flex/.test(css),
+      },
+      {
+        label: 'Brand and links separated: justify-content: space-between',
+        test: css => /justify-content\s*:\s*space-between/.test(css),
+      },
+      {
+        label: 'Links are horizontal: .links uses display: flex',
+        test: css => /\.links\s*\{[^}]*display\s*:\s*flex/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'card-grid',
+    title: 'Build a Card Grid',
+    description: 'Use CSS Grid to create a responsive card layout that fills the available width.',
+    targetHtml: `<div class="grid">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+  <div class="card">Card 3</div>
+  <div class="card">Card 4</div>
+  <div class="card">Card 5</div>
+  <div class="card">Card 6</div>
+</div>`,
+    targetCss: `.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  background: #f4f4f5;
+  padding: 12px;
+  border-radius: 8px;
+}
+.card {
+  height: 80px;
+  background: #6366f1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 13px;
+}`,
+    startingHtml: `<div class="grid">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+  <div class="card">Card 3</div>
+  <div class="card">Card 4</div>
+  <div class="card">Card 5</div>
+  <div class="card">Card 6</div>
+</div>`,
+    startingCss: `.grid {
+  /* Set up a responsive grid */
+  background: #f4f4f5;
+  padding: 12px;
+  border-radius: 8px;
+}
+.card {
+  height: 80px;
+  background: #6366f1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 13px;
+}`,
+    checks: [
+      {
+        label: 'Grid uses display: grid',
+        test: css => /\.grid\s*\{[^}]*display\s*:\s*grid/.test(css),
+      },
+      {
+        label: 'Columns defined with grid-template-columns',
+        test: css => /grid-template-columns\s*:/.test(css),
+      },
+      {
+        label: 'Responsive columns using repeat() and minmax()',
+        test: css => /repeat\s*\(/.test(css) && /minmax\s*\(/.test(css),
+      },
+    ],
+  },
+  {
+    id: 'holy-grail',
+    title: 'Holy Grail Layout',
+    description:
+      'Use CSS Grid areas to build a classic layout: header, nav, main content, aside, and footer.',
+    targetHtml: `<div class="page">
+  <header class="header">Header</header>
+  <nav class="nav">Nav</nav>
+  <main class="main">Main Content</main>
+  <aside class="aside">Aside</aside>
+  <footer class="footer">Footer</footer>
+</div>`,
+    targetCss: `.page {
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "nav    main   aside"
+    "footer footer footer";
+  gap: 8px;
+  height: 220px;
+  background: #f4f4f5;
+  padding: 8px;
+  border-radius: 8px;
+}
+.header { grid-area: header; background: #4338ca; }
+.nav    { grid-area: nav;    background: #4f46e5; }
+.main   { grid-area: main;   background: #6366f1; }
+.aside  { grid-area: aside;  background: #4f46e5; }
+.footer { grid-area: footer; background: #818cf8; }
+.header,.nav,.main,.aside,.footer {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 6px;
+}`,
+    startingHtml: `<div class="page">
+  <header class="header">Header</header>
+  <nav class="nav">Nav</nav>
+  <main class="main">Main Content</main>
+  <aside class="aside">Aside</aside>
+  <footer class="footer">Footer</footer>
+</div>`,
+    startingCss: `.page {
+  /* Set up a grid with 3 named areas */
+  height: 220px;
+  background: #f4f4f5;
+  padding: 8px;
+  border-radius: 8px;
+  gap: 8px;
+}
+/* Assign grid-area to each child */
+.header { background: #4338ca; }
+.nav    { background: #4f46e5; }
+.main   { background: #6366f1; }
+.aside  { background: #4f46e5; }
+.footer { background: #818cf8; }
+.header,.nav,.main,.aside,.footer {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 6px;
+}`,
+    checks: [
+      {
+        label: 'Page uses display: grid',
+        test: css => /\.page\s*\{[^}]*display\s*:\s*grid/.test(css),
+      },
+      {
+        label: 'Grid areas defined with grid-template-areas',
+        test: css => /grid-template-areas\s*:/.test(css),
+      },
+      {
+        label: 'Children placed with grid-area',
+        test: css => /grid-area\s*:/.test(css),
+      },
+    ],
+  },
+];
