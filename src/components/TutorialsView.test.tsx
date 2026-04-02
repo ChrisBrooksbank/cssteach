@@ -12,6 +12,7 @@ describe('TutorialsView', () => {
   it('renders group headings', () => {
     render(<TutorialsView groups={layoutTutorials} />);
     expect(screen.getByRole('heading', { name: 'Flexbox' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'CSS Grid' })).toBeInTheDocument();
   });
 
   it('renders lesson titles', () => {
@@ -41,7 +42,8 @@ describe('TutorialsView', () => {
   it('renders a LiveEditor for each lesson', () => {
     render(<TutorialsView groups={layoutTutorials} />);
     const editors = screen.getAllByRole('textbox', { name: /css editor/i });
-    expect(editors).toHaveLength(layoutTutorials[0].lessons.length);
+    const totalLessons = layoutTutorials.reduce((sum, g) => sum + g.lessons.length, 0);
+    expect(editors).toHaveLength(totalLessons);
   });
 
   it('pre-populates each editor with lesson CSS', () => {
@@ -49,5 +51,29 @@ describe('TutorialsView', () => {
     const editors = screen.getAllByRole('textbox', { name: /css editor/i });
     expect((editors[0] as HTMLTextAreaElement).value).toContain('display: flex');
     expect((editors[1] as HTMLTextAreaElement).value).toContain('flex-wrap');
+  });
+
+  it('renders CSS Grid lesson titles', () => {
+    render(<TutorialsView groups={layoutTutorials} />);
+    expect(screen.getByRole('heading', { name: 'Grid Basics' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Placement & Spanning' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Responsive Layouts' })).toBeInTheDocument();
+  });
+
+  it('renders CSS Grid concept tags', () => {
+    render(<TutorialsView groups={layoutTutorials} />);
+    expect(screen.getByText('display: grid')).toBeInTheDocument();
+    expect(screen.getByText('grid-template-columns')).toBeInTheDocument();
+    expect(screen.getByText('grid-template-areas')).toBeInTheDocument();
+    expect(screen.getByText('minmax()')).toBeInTheDocument();
+  });
+
+  it('pre-populates Grid editors with lesson CSS', () => {
+    render(<TutorialsView groups={layoutTutorials} />);
+    const editors = screen.getAllByRole('textbox', { name: /css editor/i });
+    // editors 2, 3, 4 are Grid lessons
+    expect((editors[2] as HTMLTextAreaElement).value).toContain('display: grid');
+    expect((editors[3] as HTMLTextAreaElement).value).toContain('grid-template-areas');
+    expect((editors[4] as HTMLTextAreaElement).value).toContain('auto-fill');
   });
 });
