@@ -31,7 +31,7 @@
 ### Phase 4: Typography & Color Module (spec: typography-color.md)
 
 - [x] Typography tutorials — Font properties (family, size, weight, style) and text layout (line-height, letter-spacing, text-align, text-transform)
-- [ ] Typography tutorials — Web fonts, color formats (hex, rgb, hsl, oklch), and CSS custom properties for theming
+- [x] Typography tutorials — Web fonts, color formats (hex, rgb, hsl, oklch), and CSS custom properties for theming
 - [ ] Typography reference — Property reference table and color format comparison chart with live swatches
 - [ ] Typography challenges — Match typography styles, build HSL color palettes, and theme switcher with custom properties
 
