@@ -8,14 +8,15 @@
 
 ## Technical Decisions
 
-| Decision | Choice |
-|----------|--------|
-| **Framework** | Next.js |
-| **Backend** | None — fully client-side |
-| **Hosting** | Netlify |
-| **PWA** | Yes — installable, with install promotion dialogs, update detection, and cache name bumping for version management |
+| Decision      | Choice                                                                                                             |
+| ------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Framework** | Next.js                                                                                                            |
+| **Backend**   | None — fully client-side                                                                                           |
+| **Hosting**   | Netlify                                                                                                            |
+| **PWA**       | Yes — installable, with install promotion dialogs, update detection, and cache name bumping for version management |
 
 ### PWA Requirements (Hard Requirements)
+
 - Must be a fully installable PWA
 - Install promotion dialogs to encourage users to install
 - Update detection — notify users when new version is available
@@ -24,18 +25,19 @@
 
 ## Scope & Content
 
-| Decision | Choice |
-|----------|--------|
-| **Skill levels** | All three from day one (Novice, Developer, Advanced) |
-| **SCSS** | First-class citizen (or near first-class) alongside CSS |
-| **Content creation** | AI-generated (by Claude), not hand-written |
-| **Content format** | Structured YAML files with rich metadata (audience level, estimated time, tags, etc.) |
-| **Content quality** | Top quality is a hard requirement — this is crucial |
-| **Monetization** | None — free, open-source side project |
+| Decision             | Choice                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------- |
+| **Skill levels**     | All three from day one (Novice, Developer, Advanced)                                  |
+| **SCSS**             | First-class citizen (or near first-class) alongside CSS                               |
+| **Content creation** | AI-generated (by Claude), not hand-written                                            |
+| **Content format**   | Structured YAML files with rich metadata (audience level, estimated time, tags, etc.) |
+| **Content quality**  | Top quality is a hard requirement — this is crucial                                   |
+| **Monetization**     | None — free, open-source side project                                                 |
 
 ## Design & UX Principles
 
 ### ADHD-Friendly Design (Core Requirement)
+
 - **Short lessons** — bite-sized, max 5-10 minutes each
 - **Low cognitive load UI** — clean, uncluttered, not too much on screen at once
 - **Easy pick-up/put-down** — progress saved automatically, resume exactly where you left off
@@ -44,11 +46,13 @@
 - **Text not too dense** — generous spacing, breathing room on every page
 
 ### Visual Learning Tools
+
 - **Visual diff overlays** — show exactly where your CSS output differs from the target
 - **Property explorers with sliders** — change CSS values in real-time to see what each property does
 - **Interactive diagrams** — box model explorer, Flexbox visualizer, Grid visualizer
 
 ### Accessibility
+
 - Light/dark mode support
 - Easy text size adjustment
 - General WCAG best practices
