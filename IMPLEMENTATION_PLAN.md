@@ -10,7 +10,7 @@
 
 ### Phase 1: Foundation
 
-- [ ] Replace boilerplate homepage with topic navigation hub — 4 cards (Layout, Selectors, Typography/Color, Animations) with ADHD-friendly short descriptions and clear CTAs
+- [x] Replace boilerplate homepage with topic navigation hub — 4 cards (Layout, Selectors, Typography/Color, Animations) with ADHD-friendly short descriptions and clear CTAs
 - [ ] Build shared `LiveEditor` component — split-pane CSS input + sandboxed HTML preview, used across all 4 topic areas
 - [ ] Build topic page shell — `/[topic]` route with Tutorials / Reference / Challenges tab navigation, consistent header
 
