@@ -44,7 +44,7 @@
 
 ### Phase 6: Testing
 
-- [ ] Unit tests for `LiveEditor` and tab navigation components
+- [x] Unit tests for `LiveEditor` and tab navigation components
 - [ ] E2E tests covering each topic module's happy path (load, interact, check output)
 - [ ] Update Playwright visual regression baselines for all 4 topic pages
 
