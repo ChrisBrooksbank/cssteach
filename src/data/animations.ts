@@ -226,4 +226,276 @@ export const animationsTutorials: TutorialGroup[] = [
       },
     ],
   },
+  {
+    id: 'keyframes',
+    title: 'Keyframe Animations',
+    lessons: [
+      {
+        id: 'keyframes-basics',
+        title: '@keyframes Basics',
+        description:
+          'Define animation steps with @keyframes, then attach them with the animation property.',
+        concepts: [
+          '@keyframes',
+          'animation-name',
+          'animation-duration',
+          'animation-iteration-count',
+        ],
+        initialHtml: `<div class="box pulse">pulse</div>
+<div class="box spin">spin</div>
+<div class="box bounce">bounce</div>`,
+        initialCss: `body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  gap: 24px;
+  padding: 32px;
+  background: #f9fafb;
+}
+
+.box {
+  width: 80px;
+  height: 80px;
+  background: #6366f1;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Define the animation steps */
+@keyframes pulse {
+  0%   { transform: scale(1); opacity: 1; }
+  50%  { transform: scale(1.15); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-20px); }
+}
+
+/* Attach with animation: name duration timing iteration */
+.pulse  { animation: pulse 1.2s ease-in-out infinite; }
+.spin   { animation: spin 1.5s linear infinite; }
+.bounce { animation: bounce 0.8s ease-in-out infinite; }
+
+/* Try:
+   animation-iteration-count: 3 (run 3 times then stop)
+   animation-direction: alternate (ping-pong)
+   animation-play-state: paused */`,
+      },
+      {
+        id: 'animation-properties',
+        title: 'Animation Properties',
+        description:
+          'Control fill mode, direction, delay, and play state for precise animation behaviour.',
+        concepts: [
+          'animation-fill-mode',
+          'animation-direction',
+          'animation-delay',
+          'animation-play-state',
+        ],
+        initialHtml: `<div class="bar"></div>
+<div class="bar delay"></div>
+<div class="bar reverse"></div>`,
+        initialCss: `body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  background: #f9fafb;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); background: #6366f1; }
+  to   { transform: translateX(160px); background: #ec4899; }
+}
+
+.bar {
+  width: 80px;
+  height: 36px;
+  border-radius: 6px;
+  background: #6366f1;
+  /* forwards: stays at final keyframe when done */
+  animation: slide 1.2s ease-in-out 1 forwards;
+}
+
+/* animation-delay: waits before starting */
+.delay {
+  animation-delay: 0.6s;
+  /* backwards: shows from-state during delay */
+  animation-fill-mode: backwards;
+}
+
+/* animation-direction: alternate plays forward then backward */
+.reverse {
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+/* Try:
+   animation-fill-mode: none | forwards | backwards | both
+   animation-play-state: paused on hover
+   Hover selector: .bar:hover { animation-play-state: paused; } */`,
+      },
+    ],
+  },
+  {
+    id: 'combining-and-accessibility',
+    title: 'Combining & Accessibility',
+    lessons: [
+      {
+        id: 'combining-transforms-animations',
+        title: 'Combining Transforms & Animations',
+        description:
+          'Stack multiple transforms inside @keyframes and layer several animations on one element.',
+        concepts: ['multiple transforms', 'multiple animations', 'transform-origin in keyframes'],
+        initialHtml: `<div class="orbit-scene">
+  <div class="planet"></div>
+</div>
+<div class="loader">
+  <div class="dot"></div>
+  <div class="dot d2"></div>
+  <div class="dot d3"></div>
+</div>`,
+        initialCss: `body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 32px;
+  background: #0f172a;
+}
+
+/* Orbit: combine rotation + translation in one keyframe */
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+
+.orbit-scene {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.planet {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 12px #6366f1;
+  animation: orbit 2s linear infinite;
+}
+
+/* Staggered dots: same animation, different delays */
+@keyframes blink {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40%            { transform: scale(1); opacity: 1; }
+}
+
+.loader { display: flex; gap: 8px; }
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ec4899;
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+.d2 { animation-delay: 0.2s; }
+.d3 { animation-delay: 0.4s; }
+
+/* Try:
+   Change orbit radius via translateX value
+   Give each dot a different color
+   Add a second animation to .planet: pulse from the keyframes lesson */`,
+      },
+      {
+        id: 'reduced-motion',
+        title: 'prefers-reduced-motion',
+        description:
+          'Some users need animations disabled. Use the prefers-reduced-motion media query to respect that preference.',
+        concepts: ['prefers-reduced-motion', 'accessibility', 'motion media query'],
+        initialHtml: `<div class="spinner"></div>
+<p class="msg">Simulating "reduce motion" — edit the CSS comment below to see the accessible version.</p>
+<div class="banner">New feature!</div>`,
+        initialCss: `body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  background: #f9fafb;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slide-in {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.banner {
+  background: #6366f1;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  animation: slide-in 0.5s ease-out both;
+}
+
+.msg {
+  font-size: 13px;
+  color: #6b7280;
+  text-align: center;
+  max-width: 300px;
+  margin: 0;
+}
+
+/* Respect user's motion preference.
+   Uncomment this block to see the accessible version:
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+    border: 4px solid #6366f1;
+  }
+  .banner {
+    animation: none;
+  }
+}
+*/
+
+/* Try:
+   Uncomment the media query above
+   Use prefers-reduced-motion: no-preference to target animated-ok users
+   animation-duration: 0.001ms is another common reset pattern */`,
+      },
+    ],
+  },
 ];

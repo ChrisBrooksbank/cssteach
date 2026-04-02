@@ -38,7 +38,7 @@
 ### Phase 5: Animations Module (spec: animations.md)
 
 - [x] Animations tutorials — Transitions and 2D/3D transforms (translate, rotate, scale, skew)
-- [ ] Animations tutorials — Keyframe animations, combining transforms/animations, prefers-reduced-motion accessibility
+- [x] Animations tutorials — Keyframe animations, combining transforms/animations, prefers-reduced-motion accessibility
 - [ ] Animations reference — Transition/transform property cards, timing function gallery with cubic-bezier visualizer
 - [ ] Animations challenges — Hover effects, loading spinners, page transitions, and interactive button state transitions
 
