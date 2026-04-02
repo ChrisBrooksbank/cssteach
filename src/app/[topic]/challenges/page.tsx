@@ -8,7 +8,7 @@ import { animationsChallenges } from '@/data/animations';
 const challengesByTopic: Record<string, Challenge[]> = {
   layout: layoutChallenges,
   selectors: selectorsChallenges,
-  typography: typographyChallenges,
+  'typography-color': typographyChallenges,
   animations: animationsChallenges,
 };
 

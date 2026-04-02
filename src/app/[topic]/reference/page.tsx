@@ -8,7 +8,7 @@ import { animationsReference } from '@/data/animations';
 const referenceByTopic: Record<string, ReferenceSection[]> = {
   layout: layoutReference,
   selectors: selectorsReference,
-  typography: typographyReference,
+  'typography-color': typographyReference,
   animations: animationsReference,
 };
 

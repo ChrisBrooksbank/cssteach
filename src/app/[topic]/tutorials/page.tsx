@@ -8,7 +8,7 @@ import { animationsTutorials } from '@/data/animations';
 const tutorialsByTopic: Record<string, TutorialGroup[]> = {
   layout: layoutTutorials,
   selectors: selectorsTutorials,
-  typography: typographyTutorials,
+  'typography-color': typographyTutorials,
   animations: animationsTutorials,
 };
 
