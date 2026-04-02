@@ -1,4 +1,4 @@
-import type { TutorialGroup, ReferenceSection } from './layout';
+import type { TutorialGroup, ReferenceSection, Challenge } from './layout';
 
 export const typographyTutorials: TutorialGroup[] = [
   {
@@ -568,6 +568,298 @@ export const typographyReference: ReferenceSection[] = [
         ],
         demoHtml: `<code class="a">const color = "oklch(0.6 0.18 250)";</code>`,
         demoCss: `code{display:block;font-family:ui-monospace,"Cascadia Code","Courier New",monospace;font-size:13px;color:#4f46e5;background:#f5f3ff;padding:10px 12px;border-radius:6px;white-space:pre}`,
+      },
+    ],
+  },
+];
+
+export const typographyChallenges: Challenge[] = [
+  {
+    id: 'match-typography',
+    title: 'Match the Typography',
+    description:
+      'Recreate the target text style. Apply font-size, font-weight, letter-spacing, text-transform, and color to match.',
+    targetHtml: `<h1 class="headline">HEADLINES MATTER</h1>
+<p class="byline">By a CSS learner</p>
+<p class="body">Good typography guides the reader's eye and sets the tone of the page.</p>`,
+    targetCss: `body { font-family: system-ui, sans-serif; padding: 16px; }
+
+.headline {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1f2937;
+  margin: 0 0 4px;
+}
+
+.byline {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin: 0 0 12px;
+}
+
+.body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #374151;
+  margin: 0;
+}`,
+    startingHtml: `<h1 class="headline">HEADLINES MATTER</h1>
+<p class="byline">By a CSS learner</p>
+<p class="body">Good typography guides the reader's eye and sets the tone of the page.</p>`,
+    startingCss: `body { font-family: system-ui, sans-serif; padding: 16px; }
+
+/* Match the target — style these three elements */
+.headline {
+  font-size: 20px;
+  color: black;
+  margin: 0 0 4px;
+}
+
+.byline {
+  color: black;
+  margin: 0 0 12px;
+}
+
+.body {
+  margin: 0;
+}`,
+    checks: [
+      {
+        label: '.headline has font-size: 28px',
+        test: css => /\.headline[^}]*font-size\s*:\s*28px/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.headline has font-weight: 900',
+        test: css => /\.headline[^}]*font-weight\s*:\s*900/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.headline uses text-transform: uppercase',
+        test: css => /\.headline[^}]*text-transform\s*:\s*uppercase/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.byline uses letter-spacing',
+        test: css => /\.byline[^}]*letter-spacing/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.body has line-height ≥ 1.5',
+        test: css => {
+          const m = css.replace(/\n/g, ' ').match(/\.body[^}]*line-height\s*:\s*([\d.]+)/);
+          return m ? parseFloat(m[1]) >= 1.5 : false;
+        },
+      },
+    ],
+  },
+  {
+    id: 'hsl-palette',
+    title: 'Build an HSL Color Palette',
+    description:
+      'Create five harmonious swatches using hsl(). Keep the same hue (220) but vary the lightness from dark to light.',
+    targetHtml: `<div class="swatch s1">Darkest — L 20%</div>
+<div class="swatch s2">Dark — L 35%</div>
+<div class="swatch s3">Mid — L 50%</div>
+<div class="swatch s4">Light — L 70%</div>
+<div class="swatch s5">Lightest — L 90%</div>`,
+    targetCss: `body { font-family: system-ui, sans-serif; padding: 16px; }
+
+.swatch {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.s1 { background: hsl(220, 70%, 20%); color: white; }
+.s2 { background: hsl(220, 70%, 35%); color: white; }
+.s3 { background: hsl(220, 70%, 50%); color: white; }
+.s4 { background: hsl(220, 70%, 70%); color: #1f2937; }
+.s5 { background: hsl(220, 70%, 90%); color: #1f2937; }`,
+    startingHtml: `<div class="swatch s1">Darkest — L 20%</div>
+<div class="swatch s2">Dark — L 35%</div>
+<div class="swatch s3">Mid — L 50%</div>
+<div class="swatch s4">Light — L 70%</div>
+<div class="swatch s5">Lightest — L 90%</div>`,
+    startingCss: `body { font-family: system-ui, sans-serif; padding: 16px; }
+
+.swatch {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Set each swatch background using hsl(220, 70%, <lightness>) */
+/* Use color: white for dark swatches, color: #1f2937 for light ones */
+.s1 { background: grey; color: white; }
+.s2 { background: grey; color: white; }
+.s3 { background: grey; color: white; }
+.s4 { background: grey; color: #1f2937; }
+.s5 { background: grey; color: #1f2937; }`,
+    checks: [
+      {
+        label: 'Uses hsl() for backgrounds',
+        test: css => /background\s*:\s*hsl\(/.test(css),
+      },
+      {
+        label: '.s1 uses hsl with hue 220',
+        test: css => /\.s1[^}]*background\s*:\s*hsl\(\s*220/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: 'All five swatches use hsl()',
+        test: css => (css.match(/background\s*:\s*hsl\(/g) ?? []).length >= 5,
+      },
+      {
+        label: 'Lightness values are all different',
+        test: css => {
+          const matches = [...css.matchAll(/hsl\(\s*220\s*,\s*70%\s*,\s*(\d+)%\s*\)/g)];
+          const values = matches.map(m => m[1]);
+          return new Set(values).size >= 3;
+        },
+      },
+    ],
+  },
+  {
+    id: 'theme-switcher',
+    title: 'Theme Switcher with Custom Properties',
+    description:
+      'Define CSS custom properties on :root for a light theme, then override them inside a .dark class to create a dark theme.',
+    targetHtml: `<div class="card">
+  <h2 class="card-title">Light Theme</h2>
+  <p class="card-body">Custom properties make theming easy — change once, update everywhere.</p>
+  <button class="btn">Got it</button>
+</div>
+<div class="card dark">
+  <h2 class="card-title">Dark Theme</h2>
+  <p class="card-body">The same HTML — different variables applied via the .dark class.</p>
+  <button class="btn">Nice</button>
+</div>`,
+    targetCss: `body { font-family: system-ui, sans-serif; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+
+:root {
+  --bg: #ffffff;
+  --surface: #f3f4f6;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --accent: hsl(217, 91%, 55%);
+  --radius: 8px;
+}
+
+.dark {
+  --bg: #111827;
+  --surface: #1f2937;
+  --text: #f9fafb;
+  --text-muted: #9ca3af;
+  --accent: hsl(217, 91%, 65%);
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--accent);
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+
+.card-body {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}`,
+    startingHtml: `<div class="card">
+  <h2 class="card-title">Light Theme</h2>
+  <p class="card-body">Custom properties make theming easy — change once, update everywhere.</p>
+  <button class="btn">Got it</button>
+</div>
+<div class="card dark">
+  <h2 class="card-title">Dark Theme</h2>
+  <p class="card-body">The same HTML — different variables applied via the .dark class.</p>
+  <button class="btn">Nice</button>
+</div>`,
+    startingCss: `body { font-family: system-ui, sans-serif; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+
+/* 1. Define light-theme variables on :root */
+:root {
+  /* --bg, --surface, --text, --text-muted, --accent, --radius */
+}
+
+/* 2. Override variables for the dark theme */
+.dark {
+  /* same variable names, dark values */
+}
+
+/* 3. Use var() in the components below */
+.card {
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #6366f1;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4f46e5;
+  margin: 0 0 8px;
+}
+
+.card-body {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.btn {
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}`,
+    checks: [
+      {
+        label: 'Defines custom properties on :root',
+        test: css => /:root\s*\{[^}]*--/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: 'Overrides variables in .dark',
+        test: css => /\.dark\s*\{[^}]*--/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: '.card uses var() for background',
+        test: css => /\.card\s*\{[^}]*background\s*:\s*var\(/.test(css.replace(/\n/g, ' ')),
+      },
+      {
+        label: 'Uses var() for at least 4 different properties',
+        test: css => (css.match(/var\(--/g) ?? []).length >= 4,
       },
     ],
   },
