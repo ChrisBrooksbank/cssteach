@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const tabs = [
-  { label: 'Tutorials', mode: 'tutorials' },
-  { label: 'Reference', mode: 'reference' },
-  { label: 'Challenges', mode: 'challenges' },
+  { label: 'Tutorials', mode: 'tutorials', icon: '📖' },
+  { label: 'Reference', mode: 'reference', icon: '📋' },
+  { label: 'Challenges', mode: 'challenges', icon: '🏆' },
 ];
 
 export default function TopicNav({ topic }: { topic: string }) {
@@ -25,12 +25,15 @@ export default function TopicNav({ topic }: { topic: string }) {
             key={tab.mode}
             href={href}
             aria-current={isActive ? 'page' : undefined}
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-150 ${
               isActive
-                ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900'
+                ? 'bg-zinc-900 text-white shadow-sm dark:bg-zinc-50 dark:text-zinc-900'
                 : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50'
             }`}
           >
+            <span aria-hidden="true" className="mr-1.5">
+              {tab.icon}
+            </span>
             {tab.label}
           </Link>
         );

@@ -23,16 +23,16 @@ export default async function TopicLayout({
   const label = topicLabels[topic] ?? topic;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
-      <header className="border-b border-zinc-200 px-4 py-4 dark:border-zinc-800">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+      <header className="border-b border-zinc-200 bg-white px-4 py-5 dark:border-zinc-800 dark:bg-zinc-950">
         <div className="mx-auto max-w-3xl">
           <Link
             href="/"
-            className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+            className="text-sm text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
           >
             ← All topics
           </Link>
-          <h1 className="mt-1 text-2xl font-bold text-zinc-900 dark:text-zinc-50">{label}</h1>
+          <h1 className="mt-2 text-2xl font-bold text-zinc-900 dark:text-zinc-50">{label}</h1>
         </div>
       </header>
 

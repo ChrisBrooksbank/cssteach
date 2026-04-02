@@ -33,10 +33,13 @@ describe('TutorialsView', () => {
 
   it('renders concept tags for each lesson', () => {
     render(<TutorialsView groups={layoutTutorials} />);
-    expect(screen.getByText('display: flex')).toBeInTheDocument();
-    expect(screen.getByText('flex-direction')).toBeInTheDocument();
-    expect(screen.getByText('flex-wrap')).toBeInTheDocument();
-    expect(screen.getByText('flex-grow')).toBeInTheDocument();
+    // Query within <code> elements to avoid matching syntax-highlighted spans
+    const conceptTags = screen.getAllByRole('listitem');
+    const tagTexts = conceptTags.map(el => el.textContent);
+    expect(tagTexts).toContain('display: flex');
+    expect(tagTexts).toContain('flex-direction');
+    expect(tagTexts).toContain('flex-wrap');
+    expect(tagTexts).toContain('flex-grow');
   });
 
   it('renders a LiveEditor for each lesson', () => {
@@ -62,10 +65,12 @@ describe('TutorialsView', () => {
 
   it('renders CSS Grid concept tags', () => {
     render(<TutorialsView groups={layoutTutorials} />);
-    expect(screen.getByText('display: grid')).toBeInTheDocument();
-    expect(screen.getByText('grid-template-columns')).toBeInTheDocument();
-    expect(screen.getByText('grid-template-areas')).toBeInTheDocument();
-    expect(screen.getByText('minmax()')).toBeInTheDocument();
+    const conceptTags = screen.getAllByRole('listitem');
+    const tagTexts = conceptTags.map(el => el.textContent);
+    expect(tagTexts).toContain('display: grid');
+    expect(tagTexts).toContain('grid-template-columns');
+    expect(tagTexts).toContain('grid-template-areas');
+    expect(tagTexts).toContain('minmax()');
   });
 
   it('pre-populates Grid editors with lesson CSS', () => {

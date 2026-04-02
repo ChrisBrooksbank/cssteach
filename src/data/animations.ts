@@ -916,6 +916,7 @@ export const animationsChallenges: Challenge[] = [
   {
     id: 'hover-effect',
     title: 'Build a Hover Effect',
+    difficulty: 'beginner',
     description:
       'Add a smooth hover effect to the card. It should lift up and gain a shadow when hovered, using transitions.',
     targetHtml: `<div class="card">
@@ -978,14 +979,17 @@ export const animationsChallenges: Challenge[] = [
     checks: [
       {
         label: '.card has a transition property',
+        hint: 'Add a transition shorthand to .card for transform and box-shadow',
         test: css => /\.card\s*\{[^}]*transition/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.card:hover lifts with translateY',
+        hint: 'Use transform: translateY() with a negative value in .card:hover',
         test: css => /\.card:hover[^}]*translateY/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.card:hover adds box-shadow',
+        hint: 'Add a box-shadow property inside the .card:hover rule',
         test: css => /\.card:hover[^}]*box-shadow/.test(css.replace(/\n/g, ' ')),
       },
     ],
@@ -993,6 +997,7 @@ export const animationsChallenges: Challenge[] = [
   {
     id: 'loading-spinner',
     title: 'Build a Loading Spinner',
+    difficulty: 'beginner',
     description:
       'Create a CSS-only spinning loader. Use @keyframes to rotate a circle element continuously.',
     targetHtml: `<div class="spinner"></div>`,
@@ -1026,14 +1031,17 @@ export const animationsChallenges: Challenge[] = [
     checks: [
       {
         label: '@keyframes defines a rotation to 360deg',
+        hint: 'Create a @keyframes rule that rotates to 360deg using transform: rotate()',
         test: css => /@keyframes/.test(css) && /rotate\s*\(\s*360deg\s*\)/.test(css),
       },
       {
         label: '.spinner has border-radius: 50%',
+        hint: 'Set border-radius: 50% on .spinner to make it circular',
         test: css => /\.spinner[^}]*border-radius\s*:\s*50%/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.spinner uses animation with linear and infinite',
+        hint: 'Apply your keyframes with animation and include linear timing and infinite repeat',
         test: css =>
           /\.spinner[^}]*animation/.test(css.replace(/\n/g, ' ')) &&
           /linear/.test(css) &&
@@ -1044,6 +1052,7 @@ export const animationsChallenges: Challenge[] = [
   {
     id: 'fade-in',
     title: 'Fade-In Page Transition',
+    difficulty: 'intermediate',
     description:
       'Make the content section fade in when the page loads. Use @keyframes to animate from opacity 0 to 1.',
     targetHtml: `<div class="page">
@@ -1098,15 +1107,18 @@ export const animationsChallenges: Challenge[] = [
     checks: [
       {
         label: '@keyframes defines opacity change from 0 to 1',
+        hint: 'Define @keyframes with from { opacity: 0 } and to { opacity: 1 }',
         test: css =>
           /@keyframes/.test(css) && /opacity\s*:\s*0/.test(css) && /opacity\s*:\s*1/.test(css),
       },
       {
         label: '.page uses animation',
+        hint: 'Apply your keyframes to .page using the animation shorthand',
         test: css => /\.page[^}]*animation/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: 'animation uses ease-out or ease',
+        hint: 'Include ease-out or ease as the timing function in your animation',
         test: css => /ease-out|ease/.test(css),
       },
     ],
@@ -1114,6 +1126,7 @@ export const animationsChallenges: Challenge[] = [
   {
     id: 'button-states',
     title: 'Interactive Button States',
+    difficulty: 'advanced',
     description:
       'Style a button with smooth transitions across three states: default, hover, and active (pressed). Each state should look distinct.',
     targetHtml: `<button class="btn">Click me</button>`,
@@ -1164,18 +1177,22 @@ export const animationsChallenges: Challenge[] = [
     checks: [
       {
         label: '.btn has a transition property',
+        hint: 'Add a transition shorthand to .btn covering background, transform, and box-shadow',
         test: css => /\.btn\s*\{[^}]*transition/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.btn:hover changes background',
+        hint: 'Create a .btn:hover rule that sets a different background color',
         test: css => /\.btn:hover[^}]*background/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.btn:active is defined',
+        hint: 'Add a .btn:active rule for the pressed state',
         test: css => /\.btn:active/.test(css),
       },
       {
         label: '.btn:active moves down (translateY > 0)',
+        hint: 'Use translateY with a positive value in .btn:active to push the button down',
         test: css => {
           const m = css
             .replace(/\n/g, ' ')

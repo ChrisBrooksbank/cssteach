@@ -561,6 +561,7 @@ export const selectorsChallenges: Challenge[] = [
   {
     id: 'direct-children',
     title: 'Style Direct Children Only',
+    difficulty: 'beginner',
     description:
       'Use the child combinator (>) to style only the top-level list items — not the nested ones.',
     targetHtml: `<ul class="menu">
@@ -627,20 +628,24 @@ export const selectorsChallenges: Challenge[] = [
       {
         label: 'Uses the child combinator (>)',
         test: css => />/.test(css),
+        hint: 'Replace the space in ".menu li" with the > combinator',
       },
       {
         label: 'Targets .menu > li (direct children only)',
         test: css => /\.menu\s*>\s*li/.test(css),
+        hint: 'Write .menu > li to select only direct child list items',
       },
       {
         label: 'Nested items are styled differently',
         test: css => /\.menu\s*>\s*li/.test(css) && /\.menu\s+(ul\s+li|li\s+li)/.test(css),
+        hint: 'Add a separate rule like .menu ul li to style the nested items differently',
       },
     ],
   },
   {
     id: 'specificity-battle',
     title: 'Win the Specificity Battle',
+    difficulty: 'intermediate',
     description:
       'The ID rule colors the text red. Add a rule to make it green — use !important to override the ID.',
     targetHtml: `<p id="alert" class="success">Payment confirmed!</p>`,
@@ -667,20 +672,24 @@ p { margin: 0; font-size: 15px; }`,
       {
         label: 'Has a .success rule',
         test: css => /\.success\s*\{/.test(css),
+        hint: 'Create a new rule block using .success { ... }',
       },
       {
         label: 'Uses !important to override the ID',
         test: css => /!important/.test(css),
+        hint: 'Add !important after your color value to beat the ID specificity',
       },
       {
         label: 'Sets text color to green (#16a34a)',
         test: css => /color\s*:\s*#16a34a/.test(css),
+        hint: 'Use color: #16a34a to set a green color',
       },
     ],
   },
   {
     id: 'fix-broken-selector',
     title: 'Fix the Broken Selector',
+    difficulty: 'advanced',
     description:
       'The CSS uses .card.title (targets elements with both classes) instead of .card .title (descendant). Fix both broken selectors.',
     targetHtml: `<div class="card">
@@ -734,14 +743,17 @@ p { margin: 0; font-size: 15px; }`,
       {
         label: 'Fixed .card .title (descendant selector)',
         test: css => /\.card\s+\.title/.test(css),
+        hint: 'Add a space between .card and .title to make it a descendant selector',
       },
       {
         label: 'Fixed .card .body-text (descendant selector)',
         test: css => /\.card\s+\.body-text/.test(css),
+        hint: 'Add a space between .card and .body-text too',
       },
       {
         label: 'No more broken combined selectors (.card.title or .card.body-text)',
         test: css => !/\.card\.title/.test(css) && !/\.card\.body-text/.test(css),
+        hint: 'Make sure there are no selectors left without a space between the two class names',
       },
     ],
   },

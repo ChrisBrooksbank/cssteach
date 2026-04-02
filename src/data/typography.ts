@@ -577,6 +577,7 @@ export const typographyChallenges: Challenge[] = [
   {
     id: 'match-typography',
     title: 'Match the Typography',
+    difficulty: 'beginner',
     description:
       'Recreate the target text style. Apply font-size, font-weight, letter-spacing, text-transform, and color to match.',
     targetHtml: `<h1 class="headline">HEADLINES MATTER</h1>
@@ -632,22 +633,27 @@ export const typographyChallenges: Challenge[] = [
     checks: [
       {
         label: '.headline has font-size: 28px',
+        hint: 'Add font-size: 28px inside the .headline rule.',
         test: css => /\.headline[^}]*font-size\s*:\s*28px/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.headline has font-weight: 900',
+        hint: 'Use font-weight with a value of 900 for extra-bold text.',
         test: css => /\.headline[^}]*font-weight\s*:\s*900/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.headline uses text-transform: uppercase',
+        hint: 'The text-transform property can force text to uppercase.',
         test: css => /\.headline[^}]*text-transform\s*:\s*uppercase/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.byline uses letter-spacing',
+        hint: 'Try adding letter-spacing with an em value like 0.05em to .byline.',
         test: css => /\.byline[^}]*letter-spacing/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.body has line-height ≥ 1.5',
+        hint: 'Set line-height to 1.7 or similar on .body for comfortable reading.',
         test: css => {
           const m = css.replace(/\n/g, ' ').match(/\.body[^}]*line-height\s*:\s*([\d.]+)/);
           return m ? parseFloat(m[1]) >= 1.5 : false;
@@ -658,6 +664,7 @@ export const typographyChallenges: Challenge[] = [
   {
     id: 'hsl-palette',
     title: 'Build an HSL Color Palette',
+    difficulty: 'intermediate',
     description:
       'Create five harmonious swatches using hsl(). Keep the same hue (220) but vary the lightness from dark to light.',
     targetHtml: `<div class="swatch s1">Darkest — L 20%</div>
@@ -705,18 +712,22 @@ export const typographyChallenges: Challenge[] = [
     checks: [
       {
         label: 'Uses hsl() for backgrounds',
+        hint: 'Replace "grey" with hsl() — e.g. hsl(220, 70%, 50%).',
         test: css => /background\s*:\s*hsl\(/.test(css),
       },
       {
         label: '.s1 uses hsl with hue 220',
+        hint: 'Set .s1 background to hsl(220, 70%, 20%) for the darkest shade.',
         test: css => /\.s1[^}]*background\s*:\s*hsl\(\s*220/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: 'All five swatches use hsl()',
+        hint: 'Each .s1 through .s5 needs background: hsl(220, 70%, <lightness>%).',
         test: css => (css.match(/background\s*:\s*hsl\(/g) ?? []).length >= 5,
       },
       {
         label: 'Lightness values are all different',
+        hint: 'Use different lightness percentages — e.g. 20%, 35%, 50%, 70%, 90%.',
         test: css => {
           const matches = [...css.matchAll(/hsl\(\s*220\s*,\s*70%\s*,\s*(\d+)%\s*\)/g)];
           const values = matches.map(m => m[1]);
@@ -728,6 +739,7 @@ export const typographyChallenges: Challenge[] = [
   {
     id: 'theme-switcher',
     title: 'Theme Switcher with Custom Properties',
+    difficulty: 'advanced',
     description:
       'Define CSS custom properties on :root for a light theme, then override them inside a .dark class to create a dark theme.',
     targetHtml: `<div class="card">
@@ -847,18 +859,22 @@ export const typographyChallenges: Challenge[] = [
     checks: [
       {
         label: 'Defines custom properties on :root',
+        hint: 'Add variables like --bg, --text, --accent inside the :root { } block.',
         test: css => /:root\s*\{[^}]*--/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: 'Overrides variables in .dark',
+        hint: 'Redefine the same --variable names with dark-theme values inside .dark { }.',
         test: css => /\.dark\s*\{[^}]*--/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: '.card uses var() for background',
+        hint: 'Replace the hardcoded color in .card background with var(--surface).',
         test: css => /\.card\s*\{[^}]*background\s*:\s*var\(/.test(css.replace(/\n/g, ' ')),
       },
       {
         label: 'Uses var() for at least 4 different properties',
+        hint: 'Replace hardcoded colors with var(--name) in .card, .card-title, .card-body, and .btn.',
         test: css => (css.match(/var\(--/g) ?? []).length >= 4,
       },
     ],

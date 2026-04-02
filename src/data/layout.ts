@@ -471,12 +471,14 @@ export const layoutTutorials: TutorialGroup[] = [
 export interface ChallengeCheck {
   label: string;
   test: (css: string) => boolean;
+  hint?: string;
 }
 
 export interface Challenge {
   id: string;
   title: string;
   description: string;
+  difficulty?: 'beginner' | 'intermediate' | 'advanced';
   targetHtml: string;
   targetCss: string;
   startingHtml: string;
@@ -488,6 +490,7 @@ export const layoutChallenges: Challenge[] = [
   {
     id: 'centering',
     title: 'Center an Element',
+    difficulty: 'beginner',
     description:
       'Use flexbox to center the box both horizontally and vertically inside its container.',
     targetHtml: `<div class="container">
@@ -537,20 +540,24 @@ export const layoutChallenges: Challenge[] = [
       {
         label: 'Container uses display: flex',
         test: css => /\.container\s*\{[^}]*display\s*:\s*flex/.test(css),
+        hint: 'Add display: flex; inside the .container block.',
       },
       {
         label: 'Horizontal centering: justify-content: center',
         test: css => /justify-content\s*:\s*center/.test(css),
+        hint: 'Add justify-content: center; to center items along the main axis.',
       },
       {
         label: 'Vertical centering: align-items: center',
         test: css => /align-items\s*:\s*center/.test(css),
+        hint: 'Add align-items: center; to center items along the cross axis.',
       },
     ],
   },
   {
     id: 'navbar',
     title: 'Build a Navigation Bar',
+    difficulty: 'beginner',
     description:
       'Use flexbox so the brand name sits on the left and the nav links are pushed to the right.',
     targetHtml: `<nav class="navbar">
@@ -619,20 +626,24 @@ export const layoutChallenges: Challenge[] = [
       {
         label: 'Navbar uses display: flex',
         test: css => /\.navbar\s*\{[^}]*display\s*:\s*flex/.test(css),
+        hint: 'Add display: flex; inside the .navbar block.',
       },
       {
         label: 'Brand and links separated: justify-content: space-between',
         test: css => /justify-content\s*:\s*space-between/.test(css),
+        hint: 'Use justify-content: space-between; to push items to opposite edges.',
       },
       {
         label: 'Links are horizontal: .links uses display: flex',
         test: css => /\.links\s*\{[^}]*display\s*:\s*flex/.test(css),
+        hint: 'Add display: flex; to .links so list items line up horizontally.',
       },
     ],
   },
   {
     id: 'card-grid',
     title: 'Build a Card Grid',
+    difficulty: 'intermediate',
     description: 'Use CSS Grid to create a responsive card layout that fills the available width.',
     targetHtml: `<div class="grid">
   <div class="card">Card 1</div>
@@ -690,20 +701,24 @@ export const layoutChallenges: Challenge[] = [
       {
         label: 'Grid uses display: grid',
         test: css => /\.grid\s*\{[^}]*display\s*:\s*grid/.test(css),
+        hint: 'Add display: grid; inside the .grid block.',
       },
       {
         label: 'Columns defined with grid-template-columns',
         test: css => /grid-template-columns\s*:/.test(css),
+        hint: 'Use grid-template-columns to define how many columns and their sizes.',
       },
       {
         label: 'Responsive columns using repeat() and minmax()',
         test: css => /repeat\s*\(/.test(css) && /minmax\s*\(/.test(css),
+        hint: 'Try: grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));',
       },
     ],
   },
   {
     id: 'holy-grail',
     title: 'Holy Grail Layout',
+    difficulty: 'advanced',
     description:
       'Use CSS Grid areas to build a classic layout: header, nav, main content, aside, and footer.',
     targetHtml: `<div class="page">
@@ -775,14 +790,17 @@ export const layoutChallenges: Challenge[] = [
       {
         label: 'Page uses display: grid',
         test: css => /\.page\s*\{[^}]*display\s*:\s*grid/.test(css),
+        hint: 'Add display: grid; inside the .page block.',
       },
       {
         label: 'Grid areas defined with grid-template-areas',
         test: css => /grid-template-areas\s*:/.test(css),
+        hint: 'Use grid-template-areas with quoted strings like "header header header".',
       },
       {
         label: 'Children placed with grid-area',
         test: css => /grid-area\s*:/.test(css),
+        hint: 'Add grid-area: header; to .header, grid-area: nav; to .nav, etc.',
       },
     ],
   },

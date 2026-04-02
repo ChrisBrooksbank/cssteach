@@ -1,21 +1,7 @@
 'use client';
 
 import type { ReferenceSection } from '@/data/layout';
-
-function buildSrcDoc(html: string, css: string): string {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<style>
-  * { box-sizing: border-box; }
-  body { margin: 0; padding: 8px; font-family: sans-serif; }
-</style>
-<style>${css}</style>
-</head>
-<body>${html}</body>
-</html>`;
-}
+import { buildSrcDoc } from '@/lib/buildSrcDoc';
 
 interface ReferenceViewProps {
   sections: ReferenceSection[];
@@ -34,10 +20,11 @@ export default function ReferenceView({ sections }: ReferenceViewProps) {
             {section.title}
           </h2>
           <div className="grid gap-6 sm:grid-cols-2">
-            {section.cards.map(card => (
+            {section.cards.map((card, i) => (
               <article
                 key={card.id}
-                className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900"
+                className="animate-fade-in-up rounded-xl border border-zinc-200 bg-white p-4 shadow-card transition-shadow duration-200 hover:shadow-card-hover dark:border-zinc-800 dark:bg-zinc-900 dark:ring-1 dark:ring-white/5"
+                style={{ animationDelay: `${i * 50}ms` }}
               >
                 <header className="mb-3">
                   <code className="rounded-md bg-zinc-100 px-2 py-1 text-sm font-mono font-semibold text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200">

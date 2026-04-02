@@ -16,8 +16,12 @@ export default function TutorialsView({ groups }: TutorialsViewProps) {
         <section key={group.id}>
           <h2 className="mb-6 text-xl font-bold text-zinc-900 dark:text-zinc-50">{group.title}</h2>
           <div className="space-y-10">
-            {group.lessons.map(lesson => (
-              <article key={lesson.id} className="space-y-4">
+            {group.lessons.map((lesson, i) => (
+              <article
+                key={lesson.id}
+                className="animate-fade-in-up space-y-4"
+                style={{ animationDelay: `${i * 75}ms` }}
+              >
                 <header>
                   <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">
                     {lesson.title}
