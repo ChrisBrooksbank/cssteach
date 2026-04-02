@@ -1,4 +1,4 @@
-import type { TutorialGroup } from './layout';
+import type { TutorialGroup, ReferenceSection } from './layout';
 
 export const selectorsTutorials: TutorialGroup[] = [
   {
@@ -357,6 +357,201 @@ p { margin: 6px 0; }
 /* Try:
    Add a third .text rule with color: #f59e0b — amber wins.
    .child-text { color: #374151; } — explicit rule overrides inherited. */`,
+      },
+    ],
+  },
+];
+
+export const selectorsReference: ReferenceSection[] = [
+  {
+    id: 'selector-syntax',
+    title: 'Selector Syntax Quick Reference',
+    cards: [
+      {
+        id: 'element-selectors',
+        property: 'Element selectors',
+        description: 'Target HTML tags by name. Applies to every matching element on the page.',
+        values: [
+          { value: 'p', note: 'all <p> elements' },
+          { value: 'h1, h2', note: 'any h1 or h2' },
+          { value: '*', note: 'every element (universal)' },
+        ],
+        demoHtml: `<p>Paragraph one</p><p>Paragraph two</p><span>A span</span>`,
+        demoCss: `p { color: #6366f1; font-weight: bold; margin: 4px 0; }
+span { color: #6b7280; }
+* { box-sizing: border-box; }`,
+      },
+      {
+        id: 'class-id-selectors',
+        property: '.class / #id selectors',
+        description: 'Classes are reusable (.name). IDs are unique per page (#name).',
+        values: [
+          { value: '.card', note: 'elements with class="card"' },
+          { value: '#hero', note: 'element with id="hero"' },
+          { value: 'p.intro', note: '<p> with class="intro"' },
+        ],
+        demoHtml: `<p class="intro">Intro paragraph</p>
+<p>Regular paragraph</p>
+<p id="hero">Hero paragraph</p>`,
+        demoCss: `.intro { color: #16a34a; font-weight: bold; }
+#hero { background: #fef3c7; padding: 4px 8px; border-radius: 4px; }
+p { margin: 4px 0; }`,
+      },
+      {
+        id: 'combinator-selectors',
+        property: 'Combinators',
+        description: 'Combine selectors to describe element relationships.',
+        values: [
+          { value: 'A B', note: 'B anywhere inside A (descendant)' },
+          { value: 'A > B', note: 'B as direct child of A' },
+          { value: 'A + B', note: 'B immediately after A (adjacent)' },
+          { value: 'A ~ B', note: 'all B siblings after A' },
+        ],
+        demoHtml: `<div class="box">
+  <p>Direct child</p>
+  <div><p>Nested</p></div>
+</div>`,
+        demoCss: `.box > p { color: #6366f1; font-weight: bold; }
+.box p { border-left: 3px solid #e5e7eb; padding-left: 6px; }
+.box { border: 1px solid #e5e7eb; padding: 8px; border-radius: 6px; }
+p { margin: 4px 0; }`,
+      },
+      {
+        id: 'attribute-selectors',
+        property: 'Attribute selectors',
+        description: 'Target elements by their HTML attributes or attribute values.',
+        values: [
+          { value: '[href]', note: 'has an href attribute' },
+          { value: '[type="text"]', note: 'exact attribute value' },
+          { value: '[class^="btn"]', note: 'value starts with "btn"' },
+          { value: '[src$=".png"]', note: 'value ends with ".png"' },
+        ],
+        demoHtml: `<input type="text" placeholder="text input">
+<input type="checkbox">
+<a href="#">A link</a>`,
+        demoCss: `[type="text"] { border: 2px solid #6366f1; border-radius: 4px; padding: 4px 8px; }
+[type="checkbox"] { width: 18px; height: 18px; accent-color: #6366f1; }
+[href] { color: #6366f1; font-weight: bold; }`,
+      },
+      {
+        id: 'pseudo-class-selectors',
+        property: 'Pseudo-classes',
+        description: 'Target elements in a specific state or structural position.',
+        values: [
+          { value: ':hover', note: 'mouse over the element' },
+          { value: ':focus', note: 'element has focus' },
+          { value: ':nth-child(n)', note: 'by position in parent' },
+          { value: ':not(selector)', note: 'everything except…' },
+        ],
+        demoHtml: `<ul>
+  <li>Item one</li>
+  <li>Item two</li>
+  <li>Item three</li>
+</ul>`,
+        demoCss: `li:first-child { color: #6366f1; font-weight: bold; }
+li:last-child { color: #dc2626; }
+li:nth-child(2) { background: #f4f4f5; }
+ul { list-style: none; padding: 0; margin: 0; }
+li { padding: 4px 8px; }`,
+      },
+      {
+        id: 'pseudo-element-selectors',
+        property: 'Pseudo-elements',
+        description: 'Style a sub-part of an element. Always use double colons (::).',
+        values: [
+          { value: '::before', note: 'insert before element content' },
+          { value: '::after', note: 'insert after element content' },
+          { value: '::first-line', note: 'first rendered line' },
+          { value: '::first-letter', note: 'first character' },
+        ],
+        demoHtml: `<p class="tip">Always double-check your selectors.</p>`,
+        demoCss: `.tip::before { content: "💡 "; }
+.tip::first-letter { font-size: 1.4em; font-weight: bold; color: #6366f1; }
+.tip { margin: 0; line-height: 1.6; }`,
+      },
+    ],
+  },
+  {
+    id: 'specificity-scoring',
+    title: 'Specificity Scoring Guide',
+    cards: [
+      {
+        id: 'specificity-columns',
+        property: 'Specificity (a, b, c)',
+        description:
+          'Three columns, read left to right: IDs (a) beat classes (b) beat elements (c). Higher number wins.',
+        values: [
+          { value: 'ID (#id)', note: '→ adds 1 to column a' },
+          { value: 'Class (.cls) / Attribute / Pseudo-class', note: '→ adds 1 to column b' },
+          { value: 'Element (p) / Pseudo-element (::)', note: '→ adds 1 to column c' },
+        ],
+        demoHtml: `<div class="scores">
+  <div class="row"><span class="label">p</span><span class="a">0</span><span class="b">0</span><span class="c">1</span></div>
+  <div class="row"><span class="label">.cls</span><span class="a">0</span><span class="b">1</span><span class="c">0</span></div>
+  <div class="row"><span class="label">#id</span><span class="a">1</span><span class="b">0</span><span class="c">0</span></div>
+</div>`,
+        demoCss: `.scores{font-family:monospace;font-size:13px}
+.row{display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid #f4f4f5}
+.label{width:56px;color:#374151;font-weight:bold}
+.a{width:28px;height:22px;background:#dc2626;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.b{width:28px;height:22px;background:#6366f1;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.c{width:28px;height:22px;background:#16a34a;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold}`,
+      },
+      {
+        id: 'specificity-examples',
+        property: 'Selector score examples',
+        description:
+          'Add up each component to find the total score. The highest score wins the conflict.',
+        values: [
+          { value: 'h1', note: '(0,0,1)' },
+          { value: '.nav a', note: '(0,1,1)' },
+          { value: '#main .item', note: '(1,1,0)' },
+          { value: '#main .item:hover', note: '(1,2,0)' },
+        ],
+        demoHtml: `<div class="scores">
+  <div class="row"><span class="label">h1</span><span class="a">0</span><span class="b">0</span><span class="c">1</span><span class="wins">←lowest</span></div>
+  <div class="row"><span class="label">.nav a</span><span class="a">0</span><span class="b">1</span><span class="c">1</span><span></span></div>
+  <div class="row"><span class="label">#main .x</span><span class="a">1</span><span class="b">1</span><span class="c">0</span><span></span></div>
+  <div class="row"><span class="label">#id.x:hov</span><span class="a">1</span><span class="b">2</span><span class="c">0</span><span class="wins">highest</span></div>
+</div>`,
+        demoCss: `.scores{font-family:monospace;font-size:12px}
+.row{display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid #f4f4f5}
+.label{width:68px;color:#374151;font-weight:bold;font-size:11px}
+.a{width:22px;height:20px;background:#dc2626;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px}
+.b{width:22px;height:20px;background:#6366f1;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px}
+.c{width:22px;height:20px;background:#16a34a;color:#fff;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px}
+.wins{color:#6b7280;font-size:10px;margin-left:4px}`,
+      },
+      {
+        id: 'important-override',
+        property: '!important',
+        description:
+          '!important overrides all specificity. Use only as a last resort — it makes debugging hard.',
+        values: [{ value: 'p { color: red !important; }', note: 'wins over any other color rule' }],
+        demoHtml: `<p id="para" class="text">What color am I?</p>`,
+        demoCss: `/* ID wins normally */
+#para { color: #6366f1; }
+.text { color: #16a34a; }
+
+/* But !important beats the ID */
+p { color: #dc2626 !important; }
+
+p { margin: 0; font-weight: bold; font-size: 15px; }`,
+      },
+      {
+        id: 'inline-styles',
+        property: 'Inline styles',
+        description:
+          'Inline styles (style="…") have even higher specificity than IDs. Only !important overrides them.',
+        values: [
+          { value: 'style="color:red"', note: 'beats any selector' },
+          { value: '!important in stylesheet', note: 'beats inline style' },
+        ],
+        demoHtml: `<p id="p1" class="blue" style="color: #dc2626">Inline red wins</p>
+<p id="p2" class="blue">Class blue wins here</p>`,
+        demoCss: `#p1, #p2 { color: #6366f1; }
+.blue { color: #3b82f6; }
+p { margin: 4px 0; font-weight: bold; }`,
       },
     ],
   },

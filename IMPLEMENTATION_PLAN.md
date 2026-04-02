@@ -25,7 +25,7 @@
 
 - [x] Selectors tutorials — Basic selectors (element, class, ID, universal) and combinators (descendant, child, adjacent, sibling)
 - [x] Selectors tutorials — Pseudo-classes, pseudo-elements, specificity and cascade rules
-- [ ] Selectors reference — Selector syntax quick-reference and color-coded specificity scoring guide
+- [x] Selectors reference — Selector syntax quick-reference and color-coded specificity scoring guide
 - [ ] Selectors challenges — Select the right elements, specificity battles, debug broken stylesheets
 
 ### Phase 4: Typography & Color Module (spec: typography-color.md)

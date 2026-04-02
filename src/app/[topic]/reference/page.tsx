@@ -1,9 +1,11 @@
 import ReferenceView from '@/components/ReferenceView';
 import { layoutReference } from '@/data/layout';
 import type { ReferenceSection } from '@/data/layout';
+import { selectorsReference } from '@/data/selectors';
 
 const referenceByTopic: Record<string, ReferenceSection[]> = {
   layout: layoutReference,
+  selectors: selectorsReference,
 };
 
 export default async function ReferencePage({ params }: { params: Promise<{ topic: string }> }) {
