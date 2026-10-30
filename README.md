@@ -7,6 +7,8 @@ First, run the development server:
 ```bash
 npm run dev
 # or
+
+**Live demo:** [cssteach.netlify.app](https://cssteach.netlify.app)
 yarn dev
 # or
 pnpm dev
